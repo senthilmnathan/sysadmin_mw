@@ -40,6 +40,8 @@ Run tests locally using ``make`` if virtualenv is active:
 
 If virtualenv isn't active, then use
 
+::
+
     $ pipenv run make
 
 
