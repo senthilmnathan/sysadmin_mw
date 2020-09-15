@@ -1,9 +1,15 @@
-from argparse import ArgumentParser
+from argparse import Action, ArgumentParser
+
+known_drivers = ['local', 's3']
 
 class DriverAction(Action):
-    def call(self, parser, namespace, values, option_string=None):
+    def __call__(self, parser, namespace, values, option_string=None):
         driver, destination = values
-        namespace.driver = destination
+        if driver.lower() not in known_drivers:
+            parser.error("Unknown driver. Available drivers are 'local' & 's3'")
+        #
+        namespace.driver = driver.lower()
+        namespace.destination = destination
     #
 #
 
