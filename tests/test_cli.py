@@ -52,21 +52,3 @@ def test_parser_with_driver_and_destination(parser):
     assert args.driver == 'local'
     assert args.destination == "/some/path"
 #
-
-def test_parser_with_known_driver(parser):
-    """
-    Parser will not exit of a known driver is passed
-    """
-    for driver in ['s3', 'local']:
-        assert parser.parse_args([url, '--driver', driver, 'destination'])
-    #
-#
-
-def test_parser_with_driver_and_destination(parser):
-    """
-    The parser will not exit if it receives a driver with a destination
-    """
-    args = parser.parse_args([url, "--driver", "local", "/some/path"])
-    assert args.driver == 'local'
-    assert args.destination == "/some/path"
-#
