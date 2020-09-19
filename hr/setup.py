@@ -4,7 +4,7 @@ with open('README.rst', encoding='UTF-8') as f:
 	readme = f.read()
 #
 setup(
-	name='hr'
+	name='hr',
 	version='0.1.0',
 	description='Commandline utility',
 	long_description=readme,

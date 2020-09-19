@@ -1,7 +1,7 @@
 #!/bin/bash
-codeSetupHome="/opt/python/code_setup"
+codeSetupHome="/opt/python/sysadmin_mw/setup/project_setup"
 project="hr"
-codeHome="/opt/python/code"
+codeHome="/opt/python/sysadmin_mw"
 projectHome="${codeHome}/${project}"
 pythonBin="python3.8"
 PWD=$(pwd)
@@ -29,12 +29,14 @@ then
    echo -e "Error while setting up pipenv"
    exit 1
 fi
-echo -e "from setuptools import setup, find_packages\n\nwith open('README.rst', encoding='UTF-8') as f:\n\treadme = f.read()\n#\nsetup(\n\tname='${project}'\n\tversion='0.1.0',\n\tdescription='Commandline utility',\n\tlong_description=readme,\n\tauthor='Senthil     Nathan Manoharan',\n\tauthor_email='Senthil.NathanM@Yahoo.Com',\n\tpackages=find_packages('src'),\n\tpackage_dir={'': 'src'},\n\tinstall_requires=[]\n)" >> ${projectHome}/setup.py
+echo -e "from setuptools import setup, find_packages\n\nwith open('README.rst', encoding='UTF-8') as f:\n\treadme = f.read()\n#\nsetup(\n\tname='${project}',\n\tversion='0.1.0',\n\tdescription='Commandline utility',\n\tlong_description=readme,\n\tauthor='Senthil     Nathan Manoharan',\n\tauthor_email='Senthil.NathanM@Yahoo.Com',\n\tpackages=find_packages('src'),\n\tpackage_dir={'': 'src'},\n\tinstall_requires=[]\n)" >> ${projectHome}/setup.py
 
-echo -e "Initializing Project, ${project} as a GIT Repository"
-git init
-if [ $? -ne 0 ]
-then
-    echo -e "Error while initializing GIT Repository"
-fi
-cp -p ${codeSetupHome}/gitignore ${projectHome}/.gitignore
+echo -e ".PHONY: install test\n\ndefault: test\n\ninstall:\n\tpipenv install --dev --skip-lock\n\ntest:\n\tPYTHONPATH=./src pytest\n" >> ${projectHome}/Makefile
+
+#echo -e "Initializing Project, ${project} as a GIT Repository"
+#git init
+#if [ $? -ne 0 ]
+#then
+#    echo -e "Error while initializing GIT Repository"
+#fi
+#cp -p ${codeSetupHome}/gitignore ${projectHome}/.gitignore
