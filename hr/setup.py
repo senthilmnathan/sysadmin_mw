@@ -6,11 +6,14 @@ with open('README.rst', encoding='UTF-8') as f:
 setup(
 	name='hr',
 	version='0.1.0',
-	description='Commandline utility',
+	description='Commandline user management utility',
 	long_description=readme,
-	author='Senthil     Nathan Manoharan',
+	author='Senthil Nathan Manoharan',
 	author_email='Senthil.NathanM@Yahoo.Com',
 	packages=find_packages('src'),
 	package_dir={'': 'src'},
-	install_requires=[]
+	install_requires=[],
+    entry_points={
+        'console_scripts': 'hr=hr.cli:main',
+    },
 )
